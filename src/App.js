@@ -5,15 +5,24 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import React, { useEffect, useState } from 'react'
 
 function App() {
-  let isAuth=JSON.parse(sessionStorage.getItem('userDetail'))??false
+  const [isAuth,setIsAuth]=useState(false)
+
+  useEffect(()=>{
+    let token=JSON.parse(sessionStorage.getItem('userDetail'))
+    if(token){setIsAuth(true)}
+    else{setIsAuth(false)}
+  },[])
+
+  console.log("This happens on EVERY render.");
+
   return (
     <div className="App">
       <Router>  
-              <Routes>
-                  <Route path='/' element={isAuth?<Navigate  to="/dashboard"/>:<Login/>}/>
-                  <Route path='/registration?' element={<Registartion />}/>
-                  <Route path='/dashboard?' element={<Dashboard />}/>
-              </Routes>
+      <Routes>
+          <Route path='/dashboard' element={<Dashboard />}/>
+          <Route path='/' element={<Login />}/>
+         <Route path='/registration' element={<Registartion />}/>
+        </Routes>
       </Router>
     </div>
   );

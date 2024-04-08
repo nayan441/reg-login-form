@@ -24,8 +24,9 @@ const Login = () => {
       alert("No user exists")
     }
     setUserDetails(initialLoad)
-
   }
+  
+  console.log("Login Page Render")
   return (
     <div className="container mt-2">
     <h1 className='d-flex  justify-content-center'>Login Page</h1>
